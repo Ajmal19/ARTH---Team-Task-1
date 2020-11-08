@@ -5,22 +5,23 @@ import getpass
 def ask_user():
     user_login = input("Enter where you want to login(local/remote)\n")
     print('''
-    Press 1 for aws functionality
+    Press 1 for aws + partition functionality
     Press 2 for hadoop functionality
     Press 3 for lvm functionality
     Press 4 for docker functionality
-    Press 5 for partition functionality
     ''')
     user_choice = int(input("Enter your choice\n"))
     if user_choice == 1:
         aws_helper(user_login, user_choice)
     elif user_choice == 2:
-        # hadoop_helper(user_login, user_choice)
-        print("panel is upgrading\n")
+        hadoop_helper(user_login, user_choice)
+
     elif user_choice == 3:
         lvm_helper(user_login, user_choice)
     elif user_choice == 4:
         docker_helper(user_login, user_choice)
+    elif user_choice == 0:
+        os.system("exit()")
     return user_choice, user_login
 
 
@@ -47,10 +48,13 @@ def hadoop_helper(user_login, user_choice):
             elif user_input == 2:
                 os.system("java --version")
             elif user_input == 3:
+                print("panel is upgrading\n")
                 os.system("")
             elif user_input == 4:
+                print("panel is upgrading\n")
                 os.system("")
             elif user_input == 5:
+                print("panel is upgrading\n")
                 os.system("")
             elif user_input == 6:
                 os.system("hadoop-daemon.sh start namenode")
@@ -372,7 +376,7 @@ def docker_helper(user_login, user_choice):
                 os.system("docker cp {} {}".format(p1, p2))
             elif user_input == 0:
                 os.system("exit()")
-                # break
+                break
             input("Enter to continue")
     else:
         user_ip = input("Enter the IP to connect to")
@@ -625,5 +629,8 @@ print("\t\t\tWelcome to my menu")
 passwd = getpass.getpass("Enter the password to continue\n")
 if passwd != 'lala':
     exit()
-
-user_choice, user_login = ask_user()
+while True:
+    user_choice, user_login = ask_user()
+    exi = input("do youyb want to exit from the program :type (yes/no)")
+    if exi == 'yes':
+        break
